@@ -5,8 +5,9 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"distributed-calc/internal/orchestrator/handlers"
-	"distributed-calc/internal/orchestrator/services"
+	"github.com/egocentri/go-dispcalc1/internal/orchestrator/handlers"
+	"github.com/egocentri/go-dispcalc1/internal/orchestrator/services"
+
 )
 
 func main() {
