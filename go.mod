@@ -3,9 +3,6 @@ module github.com/egocentri/go-dispcalc1
 go 1.20
 
 require (
-    github.com/gin-gonic/gin v1.9.0
-
-require (
 	github.com/bytedance/sonic v1.12.6 // indirect
 	github.com/bytedance/sonic/loader v0.2.1 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect
