@@ -5,25 +5,36 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/egocentri/go-dispcalc1/internal/config"
 	"github.com/egocentri/go-dispcalc1/internal/orchestrator/handlers"
 	"github.com/egocentri/go-dispcalc1/internal/orchestrator/services"
-
+	"github.com/egocentri/go-dispcalc1/internal/orchestrator/storage"
 )
 
 func main() {
-	services.InitTaskManager()
-
-	router := gin.Default()
-	router.POST("/api/v1/calculate", handlers.CalculateExpression)
-	router.GET("/api/v1/expressions", handlers.GetExpressions)
-	router.GET("/api/v1/expressions/:id", handlers.GetExpressionByID)
-	router.GET("/internal/task", handlers.GetTask)
-	router.POST("/internal/task", handlers.PostTaskResult)
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
+	cfg := config.InitEnv()
+	store := storage.NewMemoryStorage()
+	exprManager := services.NewExpressionManager(store, cfg)
+	r := gin.Default()
+	public := r.Group("/api/v1")
+	{
+		public.POST("/calculate", handlers.CalculateExpression(exprManager))
+		public.GET("/expressions", handlers.GetExpressions(exprManager))
+		public.GET("/expressions/:id", handlers.GetExpressionByID(exprManager))
 	}
 
-	log.Printf("Orchestrator started on :%s", port)
-	router.Run(":" + port)
+	internal := r.Group("/internal")
+	{
+		internal.GET("/task", handlers.GetTask(exprManager))
+		internal.POST("/task", handlers.PostTaskResult(exprManager))
+	}
+
+	addr := ":8080"
+	if val := os.Getenv("ORCHESTRATOR_PORT"); val != "" {
+		addr = ":" + val
+	}
+	log.Printf("Orchestrator listening on %s\n", addr)
+	if err := r.Run(addr); err != nil {
+		log.Fatalf("Failed to run orchestrator: %v", err)
+	}
 }
