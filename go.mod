@@ -1,6 +1,6 @@
 module github.com/egocentri/go-dispcalc1
 
-go 1.20
+go 1.23.3
 
 require (
 	github.com/bytedance/sonic v1.12.6 // indirect
