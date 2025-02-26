@@ -15,12 +15,12 @@ type EnvConfig struct {
 
 func InitEnv() *EnvConfig {
     return &EnvConfig{
-        TimeAddition:       getIntFromEnv("TIME_ADDITION_MS", 100),
-        TimeSubtraction:    getIntFromEnv("TIME_SUBTRACTION_MS", 100),
-        TimeMultiplication: getIntFromEnv("TIME_MULTIPLICATION_MS", 100),
-        TimeDivision:       getIntFromEnv("TIME_DIVISION_MS", 100),
+        TimeAddition:       getIntFromEnv("TIME_ADDITION_MS", 1000),
+        TimeSubtraction:    getIntFromEnv("TIME_SUBTRACTION_MS", 1000),
+        TimeMultiplication: getIntFromEnv("TIME_MULTIPLICATION_MS", 1000),
+        TimeDivision:       getIntFromEnv("TIME_DIVISION_MS", 1000),
         // общий "eval" — 500 мс
-        TimeEvaluation: getIntFromEnv("TIME_EVALUATION_MS", 500),
+        TimeEvaluation: getIntFromEnv("TIME_EVALUATION_MS", 2000),
     }
 }
 
