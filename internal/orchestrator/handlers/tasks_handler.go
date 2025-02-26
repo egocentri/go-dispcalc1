@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/egocentri/go-dispcalc1/internal/orchestrator/services"
+	"github.com/egocentri/go-dispcalc1/internal/models"
 )
 
 func GetTask(exprManager *services.ExpressionManager) gin.HandlerFunc {
