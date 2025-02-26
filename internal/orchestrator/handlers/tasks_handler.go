@@ -12,7 +12,7 @@ import (
 func GetTask(exprManager *services.ExpressionManager) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		timeout := time.After(30 * time.Second)
-		ticker := time.NewTicker(500 * time.Millisecond)
+		ticker := time.NewTicker(1000 * time.Millisecond)
 		defer ticker.Stop()
 
 		for {
