@@ -19,7 +19,6 @@ func InitEnv() *EnvConfig {
         TimeSubtraction:    getIntFromEnv("TIME_SUBTRACTION_MS", 1000),
         TimeMultiplication: getIntFromEnv("TIME_MULTIPLICATION_MS", 1000),
         TimeDivision:       getIntFromEnv("TIME_DIVISION_MS", 1000),
-        // общий "eval" — 500 мс
         TimeEvaluation: getIntFromEnv("TIME_EVALUATION_MS", 2000),
     }
 }
