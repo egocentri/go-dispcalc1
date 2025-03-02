@@ -93,7 +93,6 @@ func (m *memoryStorage) CompleteTask(taskID int, result float64) error {
     }
 
     task.Status = "done"
-    task.Result = result
     m.tasks[taskID] = task
 
     expr, ok := m.expressions[task.ExpressionID]
@@ -103,6 +102,5 @@ func (m *memoryStorage) CompleteTask(taskID int, result float64) error {
     expr.Status = "done"
     expr.Result = result
     m.expressions[task.ExpressionID] = expr
-    log.Printf("Task %d completed, result: %.2f\n", taskID, result)
     return nil
 }
