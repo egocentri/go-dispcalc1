@@ -38,7 +38,7 @@ func PostTaskResult(exprManager *services.ExpressionManager) gin.HandlerFunc {
 			c.JSON(http.StatusUnprocessableEntity, gin.H{"error": "invalid request"})
 			return
 		}
-		err := exprManager.SetTaskResult(string(result.ID), result.Result)
+		err := exprManager.SetTaskResult(strconv.Itoa(result.ID), result.Result)
 		if err != nil {
 			if err.Error() == "task not found" {
 				c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
