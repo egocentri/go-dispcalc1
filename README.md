@@ -62,7 +62,20 @@ json
 }
 ```
 (Где "1" — некий ID выражения.)
-
+#### Ошибка 422 (некорректное выражение):
+Отправка запроса с пустым выражением, что не считается валидным.
+```
+curl --location 'http://localhost:8080/api/v1/calculate' \
+--header 'Content-Type: application/json' \
+--data '{"expression": ""}'
+```
+#### Ошибка 500 (кодовое слово trigger500):
+Отправка запроса с выражением, равным ```"trigger500"```, что инициирует панику в сервере и приводит к ошибке 500.
+```
+curl --location 'http://localhost:8080/api/v1/calculate' \
+--header 'Content-Type: application/json' \
+--data '{"expression": "trigger500"}'
+```
 #### Получить список всех выражений
 
 
