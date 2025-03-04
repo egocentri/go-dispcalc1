@@ -29,7 +29,6 @@ go run ./cmd/orchestrator/...
 
 ```bash
 export ORCHESTRATOR_PORT=9000
-go run ./cmd/orchestrator/...
 ```
 #### Запуск Агента
 В другом окне терминала запустите:
@@ -37,21 +36,17 @@ go run ./cmd/orchestrator/...
 ```bash
 go run ./cmd/agent/...
 ```
-Агент по умолчанию подключается к ```http://localhost:8080```. Можно переопределить:
+Агент по умолчанию подключается к ```http://localhost:8080```. 
+Можно увеличить скорость выполнения операций через переменную ```COMPUTING_POWER```
 
 ```
-export ORCHESTRATOR_URL="http://localhost:9000"
 export COMPUTING_POWER=3
 go run ./cmd/agent/...
 ```
 ## Примеры запросов
 Добавить новое выражение на вычисление
 ```bash
-curl --location 'http://localhost:8080/api/v1/calculate' \
---header 'Content-Type: application/json' \
---data '{
-  "expression": "2+2*2"
-}'
+curl --location 'http://localhost:8080/api/v1/calculate' --header 'Content-Type: application/json' --data '{"expression": "2+2*2"}'
 ```
 Ответ (201):
 ```
@@ -65,16 +60,12 @@ json
 #### Ошибка 422 (некорректное выражение):
 Отправка запроса с пустым выражением, что не считается валидным.
 ```
-curl --location 'http://localhost:8080/api/v1/calculate' \
---header 'Content-Type: application/json' \
---data '{"expression": ""}'
+curl --location 'http://localhost:8080/api/v1/calculate' --header 'Content-Type: application/json' --data '{"expression": ""}'
 ```
 #### Ошибка 500 (кодовое слово trigger500):
 Отправка запроса с выражением, равным ```"trigger500"```, что инициирует панику в сервере и приводит к ошибке 500.
 ```
-curl --location 'http://localhost:8080/api/v1/calculate' \
---header 'Content-Type: application/json' \
---data '{"expression": "trigger500"}'
+curl --location 'http://localhost:8080/api/v1/calculate' --header 'Content-Type: application/json' --data '{"expression": "trigger500"}'
 ```
 #### Получить список всех выражений
 
