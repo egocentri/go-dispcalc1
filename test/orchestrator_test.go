@@ -23,7 +23,7 @@ func TestOrchestratorCalculate(t *testing.T) {
 	router := gin.Default()
 	router.POST("/api/v1/calculate", handlers.CalculateExpression(exprManager))
 
-	body := []byte(`{"expression": "2+2*2"}`)
+	body := []byte("{\"expression\": \"2+2*2\"}")
 	req, _ := http.NewRequest("POST", "/api/v1/calculate", bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
 	w := httptest.NewRecorder()
@@ -37,3 +37,4 @@ func TestOrchestratorCalculate(t *testing.T) {
 	_, exists := resp["id"]
 	assert.True(t, exists, "Response should contain an id")
 }
+
