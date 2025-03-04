@@ -44,7 +44,7 @@ export COMPUTING_POWER=3
 go run ./cmd/agent/...
 ```
 ## Примеры запросов
-Добавить новое выражение на вычисление
+Добавить новое выражение на вычисление(в 3 терминал по счету)
 ```bash
 curl --location 'http://localhost:8080/api/v1/calculate' --header 'Content-Type: application/json' --data '{"expression": "2+2*2"}'
 ```
